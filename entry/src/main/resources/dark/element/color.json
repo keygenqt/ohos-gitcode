@@ -13,6 +13,10 @@
       "value": "#4D0083B0"
     },
     {
+      "name": "secondary",
+      "value": "#6dd5ed"
+    },
+    {
       "name": "btn_round_background",
       "value": "#19FFFFFF"
     },
