@@ -11,3 +11,4 @@
 **/.test
 /.appanalyzer
 _*.json5
+.DS_Store
