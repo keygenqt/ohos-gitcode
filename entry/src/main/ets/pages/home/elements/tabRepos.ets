@@ -20,7 +20,7 @@ let data: Array<RepoData> = [
   {
     url: 'https://gitcode.com/keygenqt_vz/ohos-gitcode',
     name: 'ohos-gitcode',
-    desc: 'Makes life easier for developers on Aurora OS.',
+    desc: 'Application for HarmonyOS NEXT on ArkTS and ArkUI working with the GitCode REST API.',
     lang: ProgrammingLanguage.arkts,
     star: 33,
     fork: 12,

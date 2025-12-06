@@ -1,6 +1,8 @@
 GitCode Viewer
 ===================
 
+> The application is under development!
+
 ![image](./data/preview.png)
 
 Application for HarmonyOS NEXT on 
