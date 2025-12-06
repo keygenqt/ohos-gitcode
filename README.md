@@ -15,3 +15,8 @@ working with the GitCode
 - Navigation Tabs/Navigation
 - Theme Dark/Light
 - Coming soon...
+
+### Resources
+- [Google Fonts](https://fonts.google.com/icons)
+- [Freepik](https://www.freepik.com/icons)
+- [Devicon](https://github.com/devicons/devicon)
