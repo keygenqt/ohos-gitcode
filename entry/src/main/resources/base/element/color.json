@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "primary",
+      "value": "#0083B0"
+    },
+    {
+      "name": "primary_light",
+      "value": "#330083B0"
+    },
+    {
+      "name": "btn_round_background",
+      "value": "#0D000000"
+    },
+    {
+      "name": "btn_round_icon_fill",
+      "value": "#FF000000"
+    }
+  ]
+}

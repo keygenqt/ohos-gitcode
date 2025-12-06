@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Demo application using open GitCode API"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "GitCode Viewer"
+    }
+  ]
+}
