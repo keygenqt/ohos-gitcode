@@ -1,10 +1,12 @@
 {
   "name": "entry",
-  "version": "1.0.0",
-  "description": "Please describe the basic information.",
+  "version": "0.0.1",
+  "description": "Application for HarmonyOS NEXT on ArkTS and ArkUI working with the GitCode REST API.",
   "main": "",
-  "author": "",
-  "license": "",
-  "dependencies": {}
+  "author": "Vitaliy Zarubin <keygenqt@yandex.ru",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "2.2.6",
+    "@ohos/lottie": "2.0.25"
+  }
 }
-

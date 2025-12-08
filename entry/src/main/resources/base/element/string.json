@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "GitCode Viewer"
+    },
+    {
+      "name": "reason_permission_internet",
+      "value": "Access internet"
+    },
+    {
+      "name": "body_loading",
+      "value": "Loading data..."
+    },
+    {
+      "name": "body_internet_error",
+      "value": "Error receiving data"
     }
   ]
 }
