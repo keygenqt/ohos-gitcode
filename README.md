@@ -16,6 +16,9 @@ working with the GitCode
 
 - Navigation Tabs/Navigation
 - Theme Dark/Light
+- HTTP request
+- Page states
+- Lottie
 - Coming soon...
 
 ### Resources
