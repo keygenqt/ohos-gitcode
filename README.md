@@ -23,5 +23,6 @@ working with the GitCode
 
 ### Resources
 - [Google Fonts](https://fonts.google.com/icons)
+- [LottieFiles](https://lottiefiles.com/)
 - [Freepik](https://www.freepik.com/icons)
 - [Devicon](https://github.com/devicons/devicon)
