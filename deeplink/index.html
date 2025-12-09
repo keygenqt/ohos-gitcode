@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome!</title>
+    <style>
+        html, body {
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            background: 0083B0;
+            background: linear-gradient(300deg, #0083B0 20%, #6dd5ed 90%);
+            color: white;
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .Root-Table {
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .Root-Table .Root-Td {
+            padding: 30px;
+        }
+        .Box {
+            background-color: #00000096;
+            border: 1px solid #0083B0;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        .Box h1 {
+            margin: 0;
+        }
+        .Box .Icon img {
+            width: 100%;
+            max-width: 150px;
+        }
+        .Box .Link {
+            border: white 1px solid;
+            border-radius: 10px;
+            padding: 10px 18px;
+            color: white;
+            background-color: black;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .Box .Link:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="doOpenLink()">
+<table class="Root-Table">
+    <tr class="Root-Tr">
+        <td class="Root-Td">
+            <div class="Box">
+                <h1>
+                    Welcome!
+                </h1>
+                <div class="Icon">
+                    <img src="./foreground.png"/>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    Authorization was successful, to complete it, go to the application.
+                </div>
+                <div onclick="doOpenLink()" class="Link">
+                    Go to the application
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+
+<script>
+    function doOpenLink() {
+        window.location.href = "link://ohos-gitcode.keygenqt.com" + window.location.search
+    }
+</script>
