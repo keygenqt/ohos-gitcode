@@ -23,6 +23,22 @@
     {
       "name": "body_internet_error",
       "value": "Error receiving data"
+    },
+    {
+      "name": "page_state_login_title",
+      "value": "Welcome!"
+    },
+    {
+      "name": "page_state_login_text",
+      "value": "To receive data, you need to be authorized on GitCode."
+    },
+    {
+      "name": "page_state_login_btn",
+      "value": "Go to GitCode"
+    },
+    {
+      "name": "page_state_error_btn",
+      "value": "Logout"
     }
   ]
 }

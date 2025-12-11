@@ -21,9 +21,17 @@ export enum ProgrammingLanguage {
 
 /**
  * Get icon programming language by name
- * @param name [string]
- * @returns [Resource]
  */
-export function programmingLanguageIcon(lang: ProgrammingLanguage): Resource {
+export function programmingLanguageIconEnum(lang: ProgrammingLanguage): Resource {
   return $r('app.media.icon_lan_' + lang.valueOf())
+}
+
+/**
+ * Get icon programming language by name
+ */
+export function programmingLanguageIcon(lang: string | null): Resource {
+  if (!lang) {
+    return $r('app.media.icon_lan_unknown')
+  }
+  return $r('app.media.icon_lan_' + lang.toLowerCase())
 }

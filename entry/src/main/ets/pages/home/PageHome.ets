@@ -3,23 +3,52 @@ import { customTabBar } from './elements/customTabBar';
 import { navDestination } from './elements/navDestination';
 import { tabRepos } from './elements/tabRepos';
 import { tabSettings } from './elements/tabSettings';
+import { PageState } from '../../base/enums';
+import { RepoModel } from '../../base/models';
+import { PageBodyState } from '../../base/components';
+import axios, { AxiosResponse } from '@ohos/axios';
+import { Links, Storage } from '../../base/constants';
+
+// PersistentStorage
+PersistentStorage.persistProp(Storage.authData, null);
+PersistentStorage.persistProp(Storage.userData, null);
 
 @Entry
 @Component
 struct PageHome {
-  @Provide('navStack') navStack: NavPathStack = new NavPathStack()
-  @State tab: number = 0;
   menus: Array<NavigationMenuItem> = [{
     value: "", icon: $r('app.media.icon_user'), action: () => {
       this.navStack.pushPath({ name: Pages.user });
     }
   }]
+  @Provide('navStack') navStack: NavPathStack = new NavPathStack()
+  @State tab: number = 0;
+  @State state: [RepoModel] | PageState = PageState.Loading;
 
   build() {
+    Column() {
+      PageBodyState({state: this.state, stateLoading: () => {
+        this.queryModel()
+      }}) {
+        this.bodyModel(this.state as [RepoModel])
+      }
+    }
+    .height('100%')
+    .width('100%')
+  }
+
+  queryModel() {
+    axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos())
+      .then((response: AxiosResponse<[RepoModel]>) => this.state = response.data)
+      .catch((_: [RepoModel]) => this.state = PageState.ErrorNetwork);
+  }
+
+  @Builder
+  bodyModel(models: [RepoModel]) {
     Tabs({ barPosition: BarPosition.End }) {
       TabContent() {
         Navigation(this.navStack) {
-          tabRepos({ navStack: this.navStack })
+          tabRepos({ navStack: this.navStack, models: models })
         }.title($r('app.string.app_name')).mode(NavigationMode.Stack).navDestination(navDestination).menus(this.menus)
       }.tabBar(customTabBar({ icon: $r('app.media.icon_home'), active: this.tab === 0 }))
 

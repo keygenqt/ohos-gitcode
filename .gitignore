@@ -12,3 +12,4 @@
 /.appanalyzer
 _*.json5
 .DS_Store
+local.*.json5

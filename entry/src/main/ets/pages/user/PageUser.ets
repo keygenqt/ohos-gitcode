@@ -12,16 +12,17 @@ export struct PageUser {
 
   build() {
     NavDestination() {
-      PageBodyState({state: this.state}) {
+      PageBodyState({state: this.state, stateLoading: () => {
+        this.queryModel()
+      }}) {
         this.bodyModel(this.state as UserModel)
       }
     }.title("User info")
-    .onShown(() => this.queryModel())
     .onBackPressed(() => this.navStack.pop() !== undefined)
   }
 
   queryModel() {
-    axios.get<UserModel, AxiosResponse<UserModel>, null>(Links.user)
+    axios.get<UserModel, AxiosResponse<UserModel>, null>(Links.user())
       .then((response: AxiosResponse<UserModel>) => setTimeout(() => this.state = response.data, 1000))
       .catch((_: AxiosError) => setTimeout(() => this.state = PageState.ErrorNetwork, 1000));
   }

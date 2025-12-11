@@ -26,7 +26,14 @@
               "entity.system.home"
             ],
             "actions": [
-              "ohos.want.action.home"
+              "ohos.want.action.home",
+              "ohos.want.action.viewData"
+            ],
+            "uris": [
+              {
+                "scheme": "link",
+                "host": "ohos-gitcode.keygenqt.com"
+              }
             ]
           }
         ]

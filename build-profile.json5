@@ -12,8 +12,15 @@
           "strictMode": {
             "caseSensitiveCheck": true,
             "useNormalizedOHMUrl": true
+          },
+          "arkOptions": {
+            "buildProfileFields": {
+              "clientId": "***",
+              "clientSecret": "***",
+              "cryptoSecret": "***",
+            }
           }
-        }
+        },
       }
     ],
     "buildModeSet": [

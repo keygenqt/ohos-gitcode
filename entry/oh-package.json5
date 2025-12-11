@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@ohos/axios": "2.2.6",
-    "@ohos/lottie": "2.0.25"
+    "@ohos/lottie": "2.0.25",
+    "@ohos/crypto-js": "2.0.5"
   }
 }
