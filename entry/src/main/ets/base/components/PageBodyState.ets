@@ -111,7 +111,7 @@ export struct PageBodyState {
         })
     }
     .padding(16)
-    .margin({top: -30})
+    .margin({top: -20})
     .width('100%')
     .height('100%')
     .alignItems(HorizontalAlign.Center)
@@ -141,7 +141,7 @@ export struct PageBodyState {
 
       Text($r('app.string.body_loading')).width('100%').fontSize(18).textAlign(TextAlign.Center)
     }
-    .margin({top: -30})
+    .margin({top: -20})
     .width('100%')
     .height('100%')
     .alignItems(HorizontalAlign.Center)
@@ -178,7 +178,7 @@ export struct PageBodyState {
           this.userData = null;
         })
     }
-    .margin({top: -30})
+    .margin({top: -20})
     .width('100%')
     .height('100%')
     .alignItems(HorizontalAlign.Center)

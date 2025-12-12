@@ -6,7 +6,7 @@ import { tabSettings } from './elements/tabSettings';
 import { PageState } from '../../base/enums';
 import { RepoModel } from '../../base/models';
 import { PageBodyState } from '../../base/components';
-import axios, { AxiosResponse } from '@ohos/axios';
+import axios, { AxiosError, AxiosResponse } from '@ohos/axios';
 import { Links, Storage } from '../../base/constants';
 
 // PersistentStorage
@@ -25,6 +25,7 @@ struct PageHome {
   @State tab: number = 0;
   @State state: [RepoModel] | PageState = PageState.Loading;
   @State pageLoading: boolean = false;
+  @State pageEnd: boolean = false;
   @State page: number = 1;
 
   build() {
@@ -32,7 +33,7 @@ struct PageHome {
       PageBodyState({state: this.state, stateLoading: () => {
         this.queryModel()
       }}) {
-        this.bodyModel(this.state as [RepoModel])
+        this.bodyModel()
       }
     }
     .height('100%')
@@ -43,25 +44,31 @@ struct PageHome {
     axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
       .then((response: AxiosResponse<[RepoModel]>) => {
         if (this.state instanceof Array) {
-          // @todo ??
-          this.state.concat(response.data)
+          if (response.data.length) {
+            response.data.forEach((item) => {
+              (this.state as [RepoModel]).push(item)
+            })
+          } else {
+            this.pageEnd = true;
+          }
         } else {
           this.state = response.data
         }
         this.pageLoading = false
       })
-      .catch((_: [RepoModel]) => this.state = PageState.ErrorNetwork);
+      .catch((_: AxiosError) => this.state = PageState.ErrorNetwork);
   }
 
   @Builder
-  bodyModel(models: [RepoModel]) {
+  bodyModel() {
     Tabs({ barPosition: BarPosition.End }) {
       TabContent() {
         Navigation(this.navStack) {
           tabRepos({
             navStack: this.navStack,
-            models: models,
+            models: this.state as [RepoModel],
             pageLoading: this.pageLoading,
+            pageEnd: this.pageEnd,
             page: this.page,
             onLoading: (page) => {
               this.page = page

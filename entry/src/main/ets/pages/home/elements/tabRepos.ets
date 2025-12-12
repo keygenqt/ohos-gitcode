@@ -6,6 +6,7 @@ class TabReposParams {
   navStack: NavPathStack | null = null;
   models: [RepoModel] | null = null;
   pageLoading: boolean = false;
+  pageEnd: boolean = false;
   page: number = 1;
   onLoading: (page: number) => void = () => {}
 }
@@ -92,14 +93,14 @@ export function tabRepos(params: TabReposParams) {
       }
       .width('100%')
       .alignItems(HorizontalAlign.Center)
+      .visibility(params.pageEnd ? Visibility.None : Visibility.Visible)
     }
-    .margin({bottom: 76 })
+    .margin({bottom: params.pageEnd ? 60 : 76 })
   }
   .padding({ right: 16, left: 16 })
   .width("100%")
   .onScrollIndex((start: number, end: number, center: number) => {
-    if (params.models?.length == end && !params.pageLoading) {
-      console.log('>> loading')
+    if (!params.pageEnd && params.models?.length == end && !params.pageLoading) {
       params.onLoading(params.page + 1)
     }
   })
