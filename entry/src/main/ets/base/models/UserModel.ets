@@ -1,12 +1,17 @@
 export interface UserModel {
-  id: string,
   avatar_url: string,
   followers_url: string,
   html_url: string,
+  id: string,
   login: string,
   name: string,
+  type: string,
+  url: string,
   bio: string,
   blog: string,
   company: string,
   email: string,
+  followers: number,
+  following: number,
+  top_languages: [string],
 }

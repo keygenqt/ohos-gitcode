@@ -63,9 +63,6 @@ export struct PageBodyState {
       }
       .width('100%')
       .height('100%')
-      .onAttach(() => {
-        console.log('>> content')
-      })
     }
   }
 
@@ -114,7 +111,7 @@ export struct PageBodyState {
         })
     }
     .padding(16)
-    .margin({top: -40})
+    .margin({top: -30})
     .width('100%')
     .height('100%')
     .alignItems(HorizontalAlign.Center)
@@ -123,7 +120,7 @@ export struct PageBodyState {
 
   @Builder
   bodyLoading() {
-    Column({space: 20}) {
+    Column({space: 40}) {
       Column() {
         Canvas(this.canvasRenderingContext)
           .width(180)
@@ -144,7 +141,7 @@ export struct PageBodyState {
 
       Text($r('app.string.body_loading')).width('100%').fontSize(18).textAlign(TextAlign.Center)
     }
-    .margin({top: -40})
+    .margin({top: -30})
     .width('100%')
     .height('100%')
     .alignItems(HorizontalAlign.Center)
@@ -153,7 +150,7 @@ export struct PageBodyState {
 
   @Builder
   bodyErrorNetwork() {
-    Column({space: 20}) {
+    Column({space: 40}) {
       Column() {
         Canvas(this.canvasRenderingContext)
           .width(160)
@@ -181,7 +178,7 @@ export struct PageBodyState {
           this.userData = null;
         })
     }
-    .margin({top: -40})
+    .margin({top: -30})
     .width('100%')
     .height('100%')
     .alignItems(HorizontalAlign.Center)

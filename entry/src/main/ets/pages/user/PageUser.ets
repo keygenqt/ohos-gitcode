@@ -29,6 +29,27 @@ export struct PageUser {
 
   @Builder
   bodyModel(model: UserModel) {
-    Text(model.name).width('100%').height('100%').fontSize(24).textAlign(TextAlign.Center)
+    Column({ space: 20 }) {
+      Text(model.avatar_url).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.followers_url).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.html_url).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.id).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.login).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.name).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.type).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.url).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.bio).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.blog).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.company).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.email).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.followers.toString()).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.following.toString()).width('100%').fontSize(16).textAlign(TextAlign.Center)
+      Text(model.top_languages.join(';')).width('100%').fontSize(16).textAlign(TextAlign.Center)
+    }
+    .padding(16)
+    .width('100%')
+    .height('100%')
+    .alignItems(HorizontalAlign.Center)
+    .justifyContent(FlexAlign.Center)
   }
 }

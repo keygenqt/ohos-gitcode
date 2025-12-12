@@ -22,7 +22,7 @@ export default class EntryAbility extends UIAbility {
       // Set code
       AppStorage.setOrCreate(Storage.authCode, code);
       // Get auth data
-      axios.post<AuthModel, AxiosResponse<AuthModel>, null>(Links.auth_token(code))
+      axios.post<AuthModel, AxiosResponse<AuthModel>, null>(Links.auth_token(code ?? 'null'))
         .then((response: AxiosResponse<AuthModel>) => {
           // Save auth data
           saveAuthModel(response.data);

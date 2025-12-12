@@ -5,6 +5,9 @@ import { programmingLanguageIcon } from '../../../base/utils/pl';
 class TabReposParams {
   navStack: NavPathStack | null = null;
   models: [RepoModel] | null = null;
+  pageLoading: boolean = false;
+  page: number = 1;
+  onLoading: (page: number) => void = () => {}
 }
 
 @Builder
@@ -72,16 +75,32 @@ export function tabRepos(params: TabReposParams) {
         }
         .width("100%")
         .padding(24)
-        .margin({ top: index ? 0 : 16, bottom: (params.models?.length ?? 0) - 1 == index ? 76 : 0 })
+        .margin({ top: index ? 0 : 16 })
         .backgroundColor($r('app.color.primary_light'))
         .border({ width: 0.5, color: $r('app.color.primary') })
         .borderRadius($r('app.float.card_radius'))
         .fontSize(16)
         .fontWeight(FontWeight.Bold)
         .onClick(() => {
-          params.navStack?.pushPath({ name: Pages.repo, param: JSON.stringify({ title: "Repo #" + index }) });
+          params.navStack?.pushPath({ name: Pages.repo, param: JSON.stringify({ model: item }) });
         })
       }
-    }, (item: number) => item.toString())
-  }.padding({ right: 16, left: 16 }).width("100%")
+    })
+    ListItem() {
+      Column() {
+        LoadingProgress().width(30).height(30)
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Center)
+    }
+    .margin({bottom: 76 })
+  }
+  .padding({ right: 16, left: 16 })
+  .width("100%")
+  .onScrollIndex((start: number, end: number, center: number) => {
+    if (params.models?.length == end && !params.pageLoading) {
+      console.log('>> loading')
+      params.onLoading(params.page + 1)
+    }
+  })
 }

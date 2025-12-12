@@ -24,6 +24,8 @@ struct PageHome {
   @Provide('navStack') navStack: NavPathStack = new NavPathStack()
   @State tab: number = 0;
   @State state: [RepoModel] | PageState = PageState.Loading;
+  @State pageLoading: boolean = false;
+  @State page: number = 1;
 
   build() {
     Column() {
@@ -38,8 +40,16 @@ struct PageHome {
   }
 
   queryModel() {
-    axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos())
-      .then((response: AxiosResponse<[RepoModel]>) => this.state = response.data)
+    axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
+      .then((response: AxiosResponse<[RepoModel]>) => {
+        if (this.state instanceof Array) {
+          // @todo ??
+          this.state.concat(response.data)
+        } else {
+          this.state = response.data
+        }
+        this.pageLoading = false
+      })
       .catch((_: [RepoModel]) => this.state = PageState.ErrorNetwork);
   }
 
@@ -48,7 +58,17 @@ struct PageHome {
     Tabs({ barPosition: BarPosition.End }) {
       TabContent() {
         Navigation(this.navStack) {
-          tabRepos({ navStack: this.navStack, models: models })
+          tabRepos({
+            navStack: this.navStack,
+            models: models,
+            pageLoading: this.pageLoading,
+            page: this.page,
+            onLoading: (page) => {
+              this.page = page
+              this.pageLoading = true
+              this.queryModel()
+            }
+          })
         }.title($r('app.string.app_name')).mode(NavigationMode.Stack).navDestination(navDestination).menus(this.menus)
       }.tabBar(customTabBar({ icon: $r('app.media.icon_home'), active: this.tab === 0 }))
 
