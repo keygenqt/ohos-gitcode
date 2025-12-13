@@ -21,7 +21,7 @@ export class Links {
   }
 
   static user_repos(page: number) {
-    const link = `https://api.gitcode.com/api/v5/users/${getUserModel()?.login}/repos?access_token=${getAuthModel()?.access_token}&type=all&sort=created_at&page=${page}&per_page=2`;
+    const link = `https://api.gitcode.com/api/v5/users/${getUserModel()?.login}/repos?access_token=${getAuthModel()?.access_token}&type=all&sort=created_at&page=${page}&per_page=4`;
     console.debug(link)
     return link
   }

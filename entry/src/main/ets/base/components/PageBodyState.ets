@@ -8,7 +8,7 @@ import { UserModel } from '../models';
 export struct PageBodyState {
   @Require
   @Prop
-  state: PageState | object;
+  state: PageState | object | null;
 
   @Require
   @BuilderParam content: () => void

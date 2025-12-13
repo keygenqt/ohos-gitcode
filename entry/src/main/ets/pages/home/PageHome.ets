@@ -24,7 +24,8 @@ struct PageHome {
   @Provide('navStack') navStack: NavPathStack = new NavPathStack()
   @State tab: number = 0;
   @State state: [RepoModel] | PageState = PageState.Loading;
-  @State pageLoading: boolean = false;
+  @State pageRefreshLoading: boolean = false;
+  @State pagePagingLoading: boolean = false;
   @State pageEnd: boolean = false;
   @State page: number = 1;
 
@@ -43,7 +44,7 @@ struct PageHome {
   queryModel() {
     axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
       .then((response: AxiosResponse<[RepoModel]>) => {
-        if (this.state instanceof Array) {
+        if (this.page != 1 && this.state instanceof Array) {
           if (response.data.length) {
             response.data.forEach((item) => {
               (this.state as [RepoModel]).push(item)
@@ -52,11 +53,17 @@ struct PageHome {
             this.pageEnd = true;
           }
         } else {
-          this.state = response.data
+          this.pageEnd = false
+          this.state = response.data;
         }
-        this.pageLoading = false
+        this.pageRefreshLoading = false
+        this.pagePagingLoading = false
       })
-      .catch((_: AxiosError) => this.state = PageState.ErrorNetwork);
+      .catch((_: AxiosError) => {
+        this.pageRefreshLoading = false
+        this.pagePagingLoading = false
+        this.state = PageState.ErrorNetwork
+      });
   }
 
   @Builder
@@ -67,14 +74,16 @@ struct PageHome {
           tabRepos({
             navStack: this.navStack,
             models: this.state as [RepoModel],
-            pageLoading: this.pageLoading,
+            pageRefreshLoading: this.pageRefreshLoading,
+            pagePagingLoading: this.pagePagingLoading,
             pageEnd: this.pageEnd,
             page: this.page,
             onLoading: (page) => {
               this.page = page
-              this.pageLoading = true
+              this.pageRefreshLoading = page == 1;
+              this.pagePagingLoading = page != 1;
               this.queryModel()
-            }
+            },
           })
         }.title($r('app.string.app_name')).mode(NavigationMode.Stack).navDestination(navDestination).menus(this.menus)
       }.tabBar(customTabBar({ icon: $r('app.media.icon_home'), active: this.tab === 0 }))
