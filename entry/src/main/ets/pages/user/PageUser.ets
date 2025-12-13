@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "@ohos/axios";
+import { common } from '@kit.AbilityKit';
 import { PageBodyState } from "../../base/components";
-import { Links } from "../../base/constants";
+import { Links, Pages } from "../../base/constants";
 import { PageState } from "../../base/enums";
 import { UserModel } from "../../base/models";
 
@@ -8,48 +9,182 @@ import { UserModel } from "../../base/models";
 export struct PageUser {
   @Consume('navStack') navStack: NavPathStack;
 
-  @State state: UserModel | PageState = PageState.Loading;
+  menus: Array<NavigationMenuItem> = [{
+    value: "", icon: $r('app.media.icon_edit'), action: () => {
+      this.navStack.pushPath({ name: Pages.user_update, param: JSON.stringify({edit: this.data}) });
+    }
+  }]
+
+  @State data: UserModel | PageState = PageState.Loading;
+  @State pageRefreshLoading: boolean = false;
+
+  private context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext
 
   build() {
     NavDestination() {
-      PageBodyState({state: this.state, stateLoading: () => {
+      PageBodyState({state: this.data, stateLoading: () => {
         this.queryModel()
       }}) {
-        this.bodyModel(this.state as UserModel)
+        this.bodyModel(this.data as UserModel)
       }
-    }.title("User info")
+    }
+    .title($r('app.string.PageUser_title'))
+    .menus(this.menus)
     .onBackPressed(() => this.navStack.pop() !== undefined)
   }
 
   queryModel() {
     axios.get<UserModel, AxiosResponse<UserModel>, null>(Links.user())
-      .then((response: AxiosResponse<UserModel>) => setTimeout(() => this.state = response.data, 1000))
-      .catch((_: AxiosError) => setTimeout(() => this.state = PageState.ErrorNetwork, 1000));
+      .then((response: AxiosResponse<UserModel>) => {
+        this.data = response.data
+        this.pageRefreshLoading = false
+      })
+      .catch((_: AxiosError) => {
+        this.data = PageState.ErrorNetwork
+        this.pageRefreshLoading = false
+      });
   }
 
   @Builder
   bodyModel(model: UserModel) {
-    Column({ space: 20 }) {
-      Text(model.avatar_url).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.followers_url).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.html_url).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.id).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.login).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.name).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.type).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.url).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.bio).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.blog).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.company).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.email).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.followers.toString()).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.following.toString()).width('100%').fontSize(16).textAlign(TextAlign.Center)
-      Text(model.top_languages.join(';')).width('100%').fontSize(16).textAlign(TextAlign.Center)
+    Refresh({ refreshing: this.pageRefreshLoading }) {
+      Column({ space: 36 }) {
+        Column() {
+          Stack() {
+            Column()
+              .width(130)
+              .height(130)
+              .borderRadius(130)
+              .border({ width: 2, color: $r('app.color.secondary') })
+              .offset({x: -2})
+            Column()
+              .width(130)
+              .height(130)
+              .borderRadius(130)
+              .border({ width: 2, color: $r('app.color.primary') })
+              .offset({x: 2})
+            Image(model.avatar_url)
+              .width(130)
+              .height(130)
+              .borderRadius(130)
+              .objectFit(ImageFit.Cover)
+          }
+          Blank().height(20)
+          Text(model.name).fontSize(30).fontWeight(FontWeight.Bold)
+          Blank().height(8)
+          Text(model.company).fontSize(14).fontColor($r('app.color.primary'))
+        }
+        .width("100%")
+        .padding(24)
+        .borderRadius($r('app.float.card_radius'))
+        .backgroundColor($r('app.color.primary_light'))
+        .border({ width: 0.5, color: $r('app.color.primary') })
+        .alignItems(HorizontalAlign.Center)
+
+        if (model.bio.length != 0) {
+          Text(model.bio).fontSize(18)
+        }
+
+        Column() {
+          Row() {
+            Column({space: 8}) {
+              Button({ type: ButtonType.Circle }) {
+                Image($r('app.media.icon_email'))
+                  .fillColor($r('app.color.btn_round_icon_fill'))
+                  .width(24)
+                  .height(24)
+              }
+              .width(40)
+              .height(40)
+              .backgroundColor($r('app.color.btn_round_background'))
+              .onClick(() => {
+                this.context?.startAbility({
+                  action: 'ohos.want.action.sendToData',
+                  abilityName: 'MainAbility',
+                  uri: `mailto:${model.email}?subject=Hello ${model.name}!`,
+                })
+              })
+              Text($r('app.string.PageUser_btn_email')).fontSize(14)
+            }
+
+            if (model.blog) {
+              Divider()
+                .vertical(true)
+                .height(40)
+                .color($r('app.color.secondary'))
+                .margin({ left: 8, right: 8 })
+
+              Column({space: 8}) {
+                Button({ type: ButtonType.Circle }) {
+                  Image($r('app.media.icon_blog'))
+                    .fillColor($r('app.color.btn_round_icon_fill'))
+                    .width(24)
+                    .height(24)
+                }
+                .width(40)
+                .height(40)
+                .backgroundColor($r('app.color.btn_round_background'))
+                .onClick(() => {
+                  this.context?.startAbility({
+                    action: 'ohos.want.action.viewData',
+                    entities: ['entity.system.browsable'],
+                    abilityName: 'MainAbility',
+                    uri: model.blog,
+                  })
+                })
+                Text($r('app.string.PageUser_btn_blog')).fontSize(14)
+              }
+            }
+
+            Divider()
+              .vertical(true)
+              .height(40)
+              .color($r('app.color.secondary'))
+              .margin({ left: 8, right: 8 })
+
+            Column({space: 8}) {
+              Button({ type: ButtonType.Circle }) {
+                Image($r('app.media.icon_gitcode'))
+                  .fillColor($r('app.color.btn_round_icon_fill'))
+                  .width(24)
+                  .height(24)
+              }
+              .width(40)
+              .height(40)
+              .backgroundColor($r('app.color.btn_round_background'))
+              .onClick(() => {
+                this.context?.startAbility({
+                  action: 'ohos.want.action.viewData',
+                  entities: ['entity.system.browsable'],
+                  abilityName: 'MainAbility',
+                  uri: model.html_url,
+                })
+              })
+              Text($r('app.string.PageUser_btn_gitcode')).fontSize(14)
+            }
+          }
+          .width("100%")
+          .justifyContent(FlexAlign.SpaceAround)
+        }
+        .width("100%")
+        .padding(16)
+        .borderRadius($r('app.float.card_radius'))
+        .backgroundColor($r('app.color.secondary_light'))
+        .border({ width: 0.5, color: $r('app.color.secondary') })
+        .alignItems(HorizontalAlign.Center)
+      }
+      .padding(16)
+      .width('100%')
+      .height('100%')
+      .alignItems(HorizontalAlign.Center)
     }
-    .padding(16)
-    .width('100%')
-    .height('100%')
-    .alignItems(HorizontalAlign.Center)
-    .justifyContent(FlexAlign.Center)
+    .onStateChange((refreshStatus: RefreshStatus) => {
+      if (refreshStatus == RefreshStatus.Refresh) {
+        this.pageRefreshLoading = true
+        this.queryModel()
+      }
+    })
+    .refreshOffset(64)
+    .pullToRefresh(true)
   }
 }

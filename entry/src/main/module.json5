@@ -27,7 +27,8 @@
             ],
             "actions": [
               "ohos.want.action.home",
-              "ohos.want.action.viewData"
+              "ohos.want.action.viewData",
+              "ohos.want.action.sendToData"
             ],
             "uris": [
               {

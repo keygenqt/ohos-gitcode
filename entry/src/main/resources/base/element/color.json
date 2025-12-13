@@ -14,7 +14,11 @@
     },
     {
       "name": "secondary",
-      "value": "#6dd5ed"
+      "value": "#0f9b0f"
+    },
+    {
+      "name": "secondary_light",
+      "value": "#140F9B0F"
     },
     {
       "name": "btn_round_background",

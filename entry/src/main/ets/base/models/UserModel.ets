@@ -8,7 +8,7 @@ export interface UserModel {
   type: string,
   url: string,
   bio: string,
-  blog: string,
+  blog: string | null,
   company: string,
   email: string,
   followers: number,

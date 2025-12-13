@@ -18,7 +18,7 @@ export struct PageBodyState {
 
   private renderingSettings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasRenderingContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.renderingSettings);
-  context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext
+  private context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext
 
   stateAuth: () => void = () => {}
   stateAuthLoading: () => void = () => {}

@@ -39,6 +39,26 @@
     {
       "name": "page_state_error_btn",
       "value": "Logout"
+    },
+    {
+      "name": "PageUser_title",
+      "value": "User info"
+    },
+    {
+      "name": "PageUser_btn_email",
+      "value": "Email"
+    },
+    {
+      "name": "PageUser_btn_blog",
+      "value": "Blog"
+    },
+    {
+      "name": "PageUser_btn_gitcode",
+      "value": "GitCode"
+    },
+    {
+      "name": "PageUserUpdate_title",
+      "value": "User update"
     }
   ]
 }

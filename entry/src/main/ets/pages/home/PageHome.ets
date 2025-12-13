@@ -23,7 +23,7 @@ struct PageHome {
   }]
   @Provide('navStack') navStack: NavPathStack = new NavPathStack()
   @State tab: number = 0;
-  @State state: [RepoModel] | PageState = PageState.Loading;
+  @State data: [RepoModel] | PageState = PageState.Loading;
   @State pageRefreshLoading: boolean = false;
   @State pagePagingLoading: boolean = false;
   @State pageEnd: boolean = false;
@@ -31,7 +31,7 @@ struct PageHome {
 
   build() {
     Column() {
-      PageBodyState({state: this.state, stateLoading: () => {
+      PageBodyState({state: this.data, stateLoading: () => {
         this.queryModel()
       }}) {
         this.bodyModel()
@@ -44,17 +44,17 @@ struct PageHome {
   queryModel() {
     axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
       .then((response: AxiosResponse<[RepoModel]>) => {
-        if (this.page != 1 && this.state instanceof Array) {
+        if (this.page != 1 && this.data instanceof Array) {
           if (response.data.length) {
             response.data.forEach((item) => {
-              (this.state as [RepoModel]).push(item)
+              (this.data as [RepoModel]).push(item)
             })
           } else {
             this.pageEnd = true;
           }
         } else {
           this.pageEnd = false
-          this.state = response.data;
+          this.data = response.data;
         }
         this.pageRefreshLoading = false
         this.pagePagingLoading = false
@@ -62,7 +62,7 @@ struct PageHome {
       .catch((_: AxiosError) => {
         this.pageRefreshLoading = false
         this.pagePagingLoading = false
-        this.state = PageState.ErrorNetwork
+        this.data = PageState.ErrorNetwork
       });
   }
 
@@ -73,7 +73,7 @@ struct PageHome {
         Navigation(this.navStack) {
           tabRepos({
             navStack: this.navStack,
-            models: this.state as [RepoModel],
+            models: this.data as [RepoModel],
             pageRefreshLoading: this.pageRefreshLoading,
             pagePagingLoading: this.pagePagingLoading,
             pageEnd: this.pageEnd,
