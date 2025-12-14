@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "@ohos/axios";
 import { common } from '@kit.AbilityKit';
 import { PageBodyState } from "../../base/components";
-import { Links, Pages } from "../../base/constants";
+import { Links, Pages, Storage } from "../../base/constants";
 import { PageState } from "../../base/enums";
 import { UserModel } from "../../base/models";
 
@@ -11,43 +11,40 @@ export struct PageUser {
 
   menus: Array<NavigationMenuItem> = [{
     value: "", icon: $r('app.media.icon_edit'), action: () => {
-      this.navStack.pushPath({ name: Pages.user_update, param: JSON.stringify({edit: this.data}) });
+      this.navStack.pushPath({ name: Pages.user_update });
     }
   }]
 
-  @State data: UserModel | PageState = PageState.Loading;
-  @State pageRefreshLoading: boolean = false;
+  @StorageLink(Storage.userData) pageData: UserModel | null = null;
+  @State pageState: PageState = PageState.Loading;
 
   private context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext
 
   build() {
     NavDestination() {
-      PageBodyState({state: this.data, stateLoading: () => {
+      PageBodyState({state: this.pageState, stateLoading: () => {
         this.queryModel()
       }}) {
-        this.bodyModel(this.data as UserModel)
+        this.bodyModel(this.pageData as UserModel)
       }
     }
     .title($r('app.string.PageUser_title'))
-    .menus(this.menus)
+    .menus(this.pageState == PageState.Ready ? this.menus : [])
     .onBackPressed(() => this.navStack.pop() !== undefined)
   }
 
   queryModel() {
     axios.get<UserModel, AxiosResponse<UserModel>, null>(Links.user())
       .then((response: AxiosResponse<UserModel>) => {
-        this.data = response.data
-        this.pageRefreshLoading = false
+        this.pageData = response.data
+        this.pageState = PageState.Ready
       })
-      .catch((_: AxiosError) => {
-        this.data = PageState.ErrorNetwork
-        this.pageRefreshLoading = false
-      });
+      .catch((_: AxiosError) => this.pageState = PageState.Error);
   }
 
   @Builder
   bodyModel(model: UserModel) {
-    Refresh({ refreshing: this.pageRefreshLoading }) {
+    Refresh({ refreshing: this.pageState == PageState.Refresh }) {
       Column({ space: 36 }) {
         Column() {
           Stack() {
@@ -180,7 +177,7 @@ export struct PageUser {
     }
     .onStateChange((refreshStatus: RefreshStatus) => {
       if (refreshStatus == RefreshStatus.Refresh) {
-        this.pageRefreshLoading = true
+        this.pageState = PageState.Refresh
         this.queryModel()
       }
     })

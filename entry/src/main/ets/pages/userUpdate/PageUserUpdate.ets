@@ -1,9 +1,10 @@
+import { Storage } from "../../base/constants";
 import { UserModel } from "../../base/models";
 
 @Component
 export struct PageUserUpdate {
   @Consume('navStack') navStack: NavPathStack;
-  @Prop model: UserModel
+  @StorageLink(Storage.userData) userData: UserModel | null = null;
 
   build() {
     NavDestination() {

@@ -1,4 +1,7 @@
 export enum PageState {
   Loading,
-  ErrorNetwork
+  Refresh,
+  Paging,
+  Error,
+  Ready,
 }

@@ -50,9 +50,9 @@ export struct PageBodyState {
       .height('100%')
       .onAttach(this.stateLoading)
     }
-    else if (this.state === PageState.ErrorNetwork) {
+    else if (this.state === PageState.Error) {
       Column() {
-        this.bodyErrorNetwork()
+        this.bodyError()
       }
       .width('100%')
       .height('100%')
@@ -149,7 +149,7 @@ export struct PageBodyState {
   }
 
   @Builder
-  bodyErrorNetwork() {
+  bodyError() {
     Column({space: 40}) {
       Column() {
         Canvas(this.canvasRenderingContext)

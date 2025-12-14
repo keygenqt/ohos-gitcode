@@ -23,15 +23,13 @@ struct PageHome {
   }]
   @Provide('navStack') navStack: NavPathStack = new NavPathStack()
   @State tab: number = 0;
-  @State data: [RepoModel] | PageState = PageState.Loading;
-  @State pageRefreshLoading: boolean = false;
-  @State pagePagingLoading: boolean = false;
-  @State pageEnd: boolean = false;
   @State page: number = 1;
+  @State pageData: [RepoModel] | null = null;
+  @State pageState: PageState = PageState.Loading;
 
   build() {
     Column() {
-      PageBodyState({state: this.data, stateLoading: () => {
+      PageBodyState({state: this.pageState, stateLoading: () => {
         this.queryModel()
       }}) {
         this.bodyModel()
@@ -44,26 +42,20 @@ struct PageHome {
   queryModel() {
     axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
       .then((response: AxiosResponse<[RepoModel]>) => {
-        if (this.page != 1 && this.data instanceof Array) {
+        if (this.page != 1 && this.pageData instanceof Array) {
           if (response.data.length) {
             response.data.forEach((item) => {
-              (this.data as [RepoModel]).push(item)
+              (this.pageData as [RepoModel]).push(item)
             })
           } else {
-            this.pageEnd = true;
+            this.page = -1;
           }
         } else {
-          this.pageEnd = false
-          this.data = response.data;
+          this.pageData = response.data;
         }
-        this.pageRefreshLoading = false
-        this.pagePagingLoading = false
+        this.pageState = PageState.Ready
       })
-      .catch((_: AxiosError) => {
-        this.pageRefreshLoading = false
-        this.pagePagingLoading = false
-        this.data = PageState.ErrorNetwork
-      });
+      .catch((_: AxiosError) => this.pageState = PageState.Error);
   }
 
   @Builder
@@ -73,15 +65,12 @@ struct PageHome {
         Navigation(this.navStack) {
           tabRepos({
             navStack: this.navStack,
-            models: this.data as [RepoModel],
-            pageRefreshLoading: this.pageRefreshLoading,
-            pagePagingLoading: this.pagePagingLoading,
-            pageEnd: this.pageEnd,
             page: this.page,
-            onLoading: (page) => {
+            data: this.pageData as [RepoModel],
+            state: this.pageState,
+            onLoading: (page, state) => {
               this.page = page
-              this.pageRefreshLoading = page == 1;
-              this.pagePagingLoading = page != 1;
+              this.pageState = state
               this.queryModel()
             },
           })

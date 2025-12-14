@@ -1,23 +1,22 @@
 import { Pages } from '../../../base/constants/Pages'
+import { PageState } from '../../../base/enums';
 import { RepoModel } from '../../../base/models';
 import { programmingLanguageIcon } from '../../../base/utils/pl';
 
 class TabReposParams {
   navStack: NavPathStack | null = null;
-  models: [RepoModel] | null = null;
-  pageRefreshLoading: boolean = false;
-  pagePagingLoading: boolean = false;
-  pageEnd: boolean = false;
   page: number = 1;
-  onLoading: (page: number) => void = () => {}
+  data: [RepoModel] | null = null;
+  state: PageState = PageState.Loading;
+  onLoading: (page: number, state: PageState) => void = () => {}
 }
 
 @Builder
 export function tabRepos(params: TabReposParams) {
-  Refresh({ refreshing: params.pageRefreshLoading }) {
-    if (params.models != null) {
+  Refresh({ refreshing: params.state == PageState.Refresh }) {
+    if (params.data != null) {
       List({ space: 16 }) {
-        ForEach(params.models, (item: RepoModel, index: number) => {
+        ForEach(params.data, (item: RepoModel, index: number) => {
           ListItem() {
             Button({ type: ButtonType.Normal, stateEffect: true }) {
               Column({space: 16}) {
@@ -96,22 +95,22 @@ export function tabRepos(params: TabReposParams) {
           }
           .width('100%')
           .alignItems(HorizontalAlign.Center)
-          .visibility(params.pageEnd ? Visibility.None : Visibility.Visible)
+          .visibility(params.page <= 0 ? Visibility.None : Visibility.Visible)
         }
-        .margin({bottom: params.pageEnd ? 60 : 76 })
+        .margin({bottom: params.page <= 0 ? 60 : 76 })
       }
       .padding({ right: 16, left: 16 })
       .width("100%")
       .onScrollIndex((start: number, end: number, center: number) => {
-        if (!params.pageEnd && params.models?.length == end && !params.pageRefreshLoading && !params.pagePagingLoading) {
-          params.onLoading(params.page + 1)
+        if (params.page > 0 && params.data?.length == end && params.state == PageState.Ready) {
+          params.onLoading(params.page + 1, PageState.Paging)
         }
       })
     }
   }
   .onStateChange((refreshStatus: RefreshStatus) => {
     if (refreshStatus == RefreshStatus.Refresh) {
-      params.onLoading(1)
+      params.onLoading(1, PageState.Refresh)
     }
   })
   .refreshOffset(64)
