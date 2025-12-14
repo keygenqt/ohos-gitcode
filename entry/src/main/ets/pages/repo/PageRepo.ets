@@ -121,7 +121,11 @@ export struct PageRepo {
         .alignItems(HorizontalAlign.Center)
 
         if (this.repoModel.description.length != 0) {
-          Text(this.repoModel.description).fontSize(18).width('100%').textAlign(TextAlign.Center)
+          Text(this.repoModel.description)
+            .fontSize(18)
+            .width('100%')
+            .padding({left: 20, right: 20})
+            .textAlign(TextAlign.Center)
         }
 
         Column() {

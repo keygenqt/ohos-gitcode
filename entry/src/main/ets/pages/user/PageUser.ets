@@ -80,7 +80,11 @@ export struct PageUser {
         .alignItems(HorizontalAlign.Center)
 
         if (this.userData?.bio.length != 0) {
-          Text(this.userData?.bio).fontSize(18).width('100%').textAlign(TextAlign.Center)
+          Text(this.userData?.bio)
+            .fontSize(18)
+            .width('100%')
+            .padding({left: 20, right: 20})
+            .textAlign(TextAlign.Center)
         }
 
         Column() {
