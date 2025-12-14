@@ -19,6 +19,13 @@ working with the GitCode
 - HTTP request
 - Page states
 - Lottie
+- OAuth
+- Deeplink
+- Plugin Hvigor
+- BuildProfile
+- PersistentStorage
+- Paging List
+- Page refresh
 - Coming soon...
 
 ### Resources
