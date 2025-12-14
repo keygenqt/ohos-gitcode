@@ -26,7 +26,7 @@ export struct PageUser {
       PageBodyState({state: this.pageState, stateLoading: () => {
         this.queryModel()
       }}) {
-        this.bodyModel(this.userData as UserModel)
+        this.bodyModel()
       }
     }
     .title($r('app.string.PageUser_title'))
@@ -44,7 +44,7 @@ export struct PageUser {
   }
 
   @Builder
-  bodyModel(model: UserModel) {
+  bodyModel() {
     Refresh({ refreshing: this.pageState == PageState.Refresh }) {
       Column({ space: 36 }) {
         Column() {
@@ -61,16 +61,16 @@ export struct PageUser {
               .borderRadius(130)
               .border({ width: 2, color: $r('app.color.primary') })
               .offset({x: 2})
-            Image(model.avatar_url)
+            Image(this.userData?.avatar_url)
               .width(130)
               .height(130)
               .borderRadius(130)
               .objectFit(ImageFit.Cover)
           }
           Blank().height(20)
-          Text(model.name).fontSize(30).fontWeight(FontWeight.Bold)
+          Text(this.userData?.name).fontSize(30).fontWeight(FontWeight.Bold)
           Blank().height(8)
-          Text(model.company).fontSize(14).fontColor($r('app.color.primary'))
+          Text(this.userData?.company).fontSize(14).fontColor($r('app.color.primary'))
         }
         .width("100%")
         .padding(24)
@@ -79,8 +79,8 @@ export struct PageUser {
         .border({ width: 0.5, color: $r('app.color.primary') })
         .alignItems(HorizontalAlign.Center)
 
-        if (model.bio.length != 0) {
-          Text(model.bio).fontSize(18)
+        if (this.userData?.bio.length != 0) {
+          Text(this.userData?.bio).fontSize(18).width('100%').textAlign(TextAlign.Center)
         }
 
         Column() {
@@ -99,13 +99,13 @@ export struct PageUser {
                 this.context?.startAbility({
                   action: 'ohos.want.action.sendToData',
                   abilityName: 'MainAbility',
-                  uri: `mailto:${model.email}?subject=Hello ${model.name}!`,
+                  uri: `mailto:${this.userData?.email}?subject=Hello ${this.userData?.name}!`,
                 })
               })
               Text($r('app.string.PageUser_btn_email')).fontSize(14)
             }
 
-            if (model.blog) {
+            if (this.userData?.blog) {
               Divider()
                 .vertical(true)
                 .height(40)
@@ -127,7 +127,7 @@ export struct PageUser {
                     action: 'ohos.want.action.viewData',
                     entities: ['entity.system.browsable'],
                     abilityName: 'MainAbility',
-                    uri: model.blog,
+                    uri: this.userData?.blog,
                   })
                 })
                 Text($r('app.string.PageUser_btn_blog')).fontSize(14)
@@ -155,7 +155,7 @@ export struct PageUser {
                   action: 'ohos.want.action.viewData',
                   entities: ['entity.system.browsable'],
                   abilityName: 'MainAbility',
-                  uri: model.html_url,
+                  uri: this.userData?.html_url,
                 })
               })
               Text($r('app.string.PageUser_btn_gitcode')).fontSize(14)

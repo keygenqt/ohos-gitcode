@@ -59,6 +59,22 @@
     {
       "name": "PageUserUpdate_title",
       "value": "User update"
+    },
+    {
+      "name": "PageRepo_title",
+      "value": "Repo info"
+    },
+    {
+      "name": "PageRepo_btn_user_page",
+      "value": "Owner"
+    },
+    {
+      "name": "PageRepo_btn_homepage",
+      "value": "Home"
+    },
+    {
+      "name": "PageRepo_btn_gitcode",
+      "value": "GitCode"
     }
   ]
 }
