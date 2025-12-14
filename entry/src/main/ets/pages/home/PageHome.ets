@@ -16,15 +16,18 @@ PersistentStorage.persistProp(Storage.userData, null);
 @Entry
 @Component
 struct PageHome {
+  @Provide('navStack') navStack: NavPathStack = new NavPathStack()
+
   menus: Array<NavigationMenuItem> = [{
     value: "", icon: $r('app.media.icon_user'), action: () => {
       this.navStack.pushPath({ name: Pages.user });
     }
   }]
-  @Provide('navStack') navStack: NavPathStack = new NavPathStack()
+
+  @StorageLink(Storage.reposData) reposData: [RepoModel] | null = null;
+
   @State tab: number = 0;
   @State page: number = 1;
-  @State pageData: [RepoModel] | null = null;
   @State pageState: PageState = PageState.Loading;
 
   build() {
@@ -42,16 +45,16 @@ struct PageHome {
   queryModel() {
     axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
       .then((response: AxiosResponse<[RepoModel]>) => {
-        if (this.page != 1 && this.pageData instanceof Array) {
+        if (this.page != 1 && this.reposData instanceof Array) {
           if (response.data.length) {
             response.data.forEach((item) => {
-              (this.pageData as [RepoModel]).push(item)
+              (this.reposData as [RepoModel]).push(item)
             })
           } else {
             this.page = -1;
           }
         } else {
-          this.pageData = response.data;
+          this.reposData = response.data;
         }
         this.pageState = PageState.Ready
       })
@@ -66,7 +69,7 @@ struct PageHome {
           tabRepos({
             navStack: this.navStack,
             page: this.page,
-            data: this.pageData as [RepoModel],
+            data: this.reposData as [RepoModel],
             state: this.pageState,
             onLoading: (page, state) => {
               this.page = page

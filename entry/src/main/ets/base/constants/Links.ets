@@ -25,4 +25,10 @@ export class Links {
     console.debug(link)
     return link
   }
+
+  static repo(path: string) {
+    const link = `https://api.gitcode.com/api/v5/repos/${getUserModel()?.login}/${path}?access_token=${getAuthModel()?.access_token}`;
+    console.debug(link)
+    return link
+  }
 }

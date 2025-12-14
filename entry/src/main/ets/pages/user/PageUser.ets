@@ -15,7 +15,8 @@ export struct PageUser {
     }
   }]
 
-  @StorageLink(Storage.userData) pageData: UserModel | null = null;
+  @StorageLink(Storage.userData) userData: UserModel | null = null;
+
   @State pageState: PageState = PageState.Loading;
 
   private context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext
@@ -25,7 +26,7 @@ export struct PageUser {
       PageBodyState({state: this.pageState, stateLoading: () => {
         this.queryModel()
       }}) {
-        this.bodyModel(this.pageData as UserModel)
+        this.bodyModel(this.userData as UserModel)
       }
     }
     .title($r('app.string.PageUser_title'))
@@ -36,7 +37,7 @@ export struct PageUser {
   queryModel() {
     axios.get<UserModel, AxiosResponse<UserModel>, null>(Links.user())
       .then((response: AxiosResponse<UserModel>) => {
-        this.pageData = response.data
+        this.userData = response.data
         this.pageState = PageState.Ready
       })
       .catch((_: AxiosError) => this.pageState = PageState.Error);

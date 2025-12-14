@@ -24,6 +24,7 @@ working with the GitCode
 - Plugin Hvigor
 - BuildProfile
 - PersistentStorage
+- Crypto
 - Paging List
 - Page refresh
 - Coming soon...

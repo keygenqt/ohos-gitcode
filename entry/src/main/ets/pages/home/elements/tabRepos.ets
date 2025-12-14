@@ -85,7 +85,7 @@ export function tabRepos(params: TabReposParams) {
             .fontSize(16)
             .fontWeight(FontWeight.Bold)
             .onClick(() => {
-              params.navStack?.pushPath({ name: Pages.repo, param: JSON.stringify({ model: item }) });
+              params.navStack?.pushPath({ name: Pages.repo, param: JSON.stringify({ repoModel: item }) });
             })
           }
         })
