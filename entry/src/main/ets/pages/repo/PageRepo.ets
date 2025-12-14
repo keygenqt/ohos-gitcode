@@ -167,7 +167,7 @@ export struct PageRepo {
                 this.context?.startAbility({
                   action: 'ohos.want.action.sendToData',
                   abilityName: 'MainAbility',
-                  uri: `mailto:${this.repoModel.owner.html_url}?subject=Hello ${this.repoModel.name}!`,
+                  uri: this.repoModel.owner.html_url,
                 })
               })
               Text($r('app.string.PageRepo_btn_user_page')).fontSize(14)
