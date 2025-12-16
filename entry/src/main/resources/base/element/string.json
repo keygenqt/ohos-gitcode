@@ -1,9 +1,15 @@
 {
   "string": [
+    {"name":  "Common", "value": "====================================" },
     {
       "name": "module_desc",
-      "value": "module description"
+      "value": "Main application"
     },
+    {
+      "name": "reason_permission_internet",
+      "value": "Access internet"
+    },
+    {"name":  "EntryAbility", "value": "==============================" },
     {
       "name": "EntryAbility_desc",
       "value": "Demo application using open GitCode API"
@@ -12,34 +18,41 @@
       "name": "EntryAbility_label",
       "value": "GitCode Viewer"
     },
+    {"name":  "PageNotFound", "value": "==============================" },
     {
-      "name": "reason_permission_internet",
-      "value": "Access internet"
+      "name": "PageNotFound_title",
+      "value": "Error"
     },
     {
-      "name": "body_loading",
+      "name": "PageNotFound_text",
+      "value": "Page not found"
+    },
+    {"name":  "PageBodyState", "value": "=============================" },
+    {
+      "name": "PageBodyState_loading_text",
       "value": "Loading data..."
     },
     {
-      "name": "body_internet_error",
+      "name": "PageBodyState_error_text",
       "value": "Error receiving data"
     },
     {
-      "name": "page_state_login_title",
+      "name": "PageBodyState_login_title",
       "value": "Welcome!"
     },
     {
-      "name": "page_state_login_text",
+      "name": "PageBodyState_login_text",
       "value": "To receive data, you need to be authorized on GitCode."
     },
     {
-      "name": "page_state_login_btn",
+      "name": "PageBodyState_login_btn",
       "value": "Go to GitCode"
     },
     {
-      "name": "page_state_error_btn",
+      "name": "PageBodyState_error_btn",
       "value": "Logout"
     },
+    {"name":  "PageUser", "value": "===================================" },
     {
       "name": "PageUser_title",
       "value": "User info"
@@ -56,10 +69,7 @@
       "name": "PageUser_btn_gitcode",
       "value": "GitCode"
     },
-    {
-      "name": "PageUserUpdate_title",
-      "value": "User update"
-    },
+    {"name":  "PageRepo", "value": "===================================" },
     {
       "name": "PageRepo_title",
       "value": "Repo info"
@@ -75,6 +85,64 @@
     {
       "name": "PageRepo_btn_gitcode",
       "value": "GitCode"
+    },
+    {"name":  "PageHome", "value": "====================================" },
+    {
+      "name": "PageHomeTabAbout_version",
+      "value": "v0.0.1"
+    },
+    {
+      "name": "PageHomeTabAbout_description",
+      "value": "Application for HarmonyOS NEXT on ArkTS and ArkUI working with the GitCode REST API."
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_gallery",
+      "value": "AppGallery"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_dev",
+      "value": "Developer"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_repo",
+      "value": "GitCode"
+    },
+    {"name":  "PageRepoUpdate", "value": "=============================" },
+    {
+      "name": "PageRepoUpdate_title",
+      "value": "Repo update"
+    },
+    {
+      "name": "PageRepoUpdate_success",
+      "value": "Repository settings updated successfully."
+    },
+    {
+      "name": "PageRepoUpdate_error",
+      "value": "Repository settings could not be updated."
+    },
+    {
+      "name": "PageRepoUpdate_homepage_label",
+      "value": "Home page"
+    },
+    {
+      "name": "PageRepoUpdate_homepage_placeholder",
+      "value": "input homepage..."
+    },
+    {
+      "name": "PageRepoUpdate_description_label",
+      "value": "Description"
+    },
+    {
+      "name": "PageRepoUpdate_description_placeholder",
+      "value": "input description..."
+    },
+    {
+      "name": "PageRepoUpdate_state_public",
+      "value": "Repository is public"
+    },
+    {
+      "name": "PageRepoUpdate_btn_submit",
+      "value": "Save"
     }
   ]
 }

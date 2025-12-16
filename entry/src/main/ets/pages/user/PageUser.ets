@@ -1,19 +1,13 @@
 import axios, { AxiosError, AxiosResponse } from "@ohos/axios";
 import { common } from '@kit.AbilityKit';
 import { PageBodyState } from "../../base/components";
-import { Links, Pages, Storage } from "../../base/constants";
+import { Links, Storage } from "../../base/constants";
 import { PageState } from "../../base/enums";
 import { UserModel } from "../../base/models";
 
 @Component
 export struct PageUser {
   @Consume('navStack') navStack: NavPathStack;
-
-  menus: Array<NavigationMenuItem> = [{
-    value: "", icon: $r('app.media.icon_edit'), action: () => {
-      this.navStack.pushPath({ name: Pages.user_update });
-    }
-  }]
 
   @StorageLink(Storage.userData) userData: UserModel | null = null;
 
@@ -30,7 +24,6 @@ export struct PageUser {
       }
     }
     .title($r('app.string.PageUser_title'))
-    .menus(this.pageState == PageState.Ready ? this.menus : [])
     .onBackPressed(() => this.navStack.pop() !== undefined)
   }
 

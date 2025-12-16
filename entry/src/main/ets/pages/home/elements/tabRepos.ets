@@ -1,13 +1,12 @@
-import { Pages } from '../../../base/constants/Pages'
 import { PageState } from '../../../base/enums';
 import { RepoModel } from '../../../base/models';
 import { programmingLanguageIcon } from '../../../base/utils/pl';
 
 class TabReposParams {
-  navStack: NavPathStack | null = null;
   page: number = 1;
   data: [RepoModel] | null = null;
   state: PageState = PageState.Loading;
+  onOpenRepo: (data: RepoModel) => void = () => {}
   onLoading: (page: number, state: PageState) => void = () => {}
 }
 
@@ -84,9 +83,7 @@ export function tabRepos(params: TabReposParams) {
             .borderRadius($r('app.float.card_radius'))
             .fontSize(16)
             .fontWeight(FontWeight.Bold)
-            .onClick(() => {
-              params.navStack?.pushPath({ name: Pages.repo, param: JSON.stringify({ repoModel: item }) });
-            })
+            .onClick(() => params.onOpenRepo(item))
           }
         })
         ListItem() {

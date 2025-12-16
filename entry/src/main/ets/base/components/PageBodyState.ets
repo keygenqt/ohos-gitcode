@@ -74,9 +74,10 @@ export struct PageBodyState {
   bodyAuth() {
     Column({space: 20}) {
       Column() {
-        Image($r('app.media.layered_foreground'))
+        Image($r('app.media.icon_foreground'))
           .width(160)
           .height(160)
+          .fillColor($r('sys.color.font'))
       }
       .width(200)
       .height(200)
@@ -87,20 +88,20 @@ export struct PageBodyState {
 
       Blank().height(8)
 
-      Text($r('app.string.page_state_login_title'))
+      Text($r('app.string.PageBodyState_login_title'))
         .width('100%')
         .fontSize(36)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 
-      Text($r('app.string.page_state_login_text'))
+      Text($r('app.string.PageBodyState_login_text'))
         .width('100%')
         .fontSize(18)
         .textAlign(TextAlign.Center)
 
       Blank().height(3)
 
-      Button($r('app.string.page_state_login_btn'), { type: ButtonType.Capsule, stateEffect: true })
+      Button($r('app.string.PageBodyState_login_btn'), { type: ButtonType.Capsule, stateEffect: true })
         .onClick(() => {
           this.context?.startAbility({
             action: 'ohos.want.action.viewData',
@@ -139,7 +140,7 @@ export struct PageBodyState {
       .justifyContent(FlexAlign.Center)
       .backgroundColor($r('app.color.primary_light'))
 
-      Text($r('app.string.body_loading')).width('100%').fontSize(18).textAlign(TextAlign.Center)
+      Text($r('app.string.PageBodyState_loading_text')).width('100%').fontSize(18).textAlign(TextAlign.Center)
     }
     .margin({top: -20})
     .width('100%')
@@ -168,11 +169,11 @@ export struct PageBodyState {
       .justifyContent(FlexAlign.Center)
       .backgroundColor($r('app.color.primary_light'))
 
-      Text($r('app.string.body_internet_error')).width('100%').fontSize(18).textAlign(TextAlign.Center)
+      Text($r('app.string.PageBodyState_error_text')).width('100%').fontSize(18).textAlign(TextAlign.Center)
 
       Blank().height(3)
 
-      Button($r('app.string.page_state_error_btn'), { type: ButtonType.Capsule, stateEffect: true })
+      Button($r('app.string.PageBodyState_error_btn'), { type: ButtonType.Capsule, stateEffect: true })
         .onClick(() => {
           this.authCode = false;
           this.userData = null;

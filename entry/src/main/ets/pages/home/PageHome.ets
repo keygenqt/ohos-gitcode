@@ -2,11 +2,12 @@ import { Pages } from '../../base/constants/Pages';
 import { customTabBar } from './elements/customTabBar';
 import { navDestination } from './elements/navDestination';
 import { tabRepos } from './elements/tabRepos';
-import { tabSettings } from './elements/tabSettings';
+import { tabAbout } from './elements/tabAbout';
 import { PageState } from '../../base/enums';
-import { RepoModel } from '../../base/models';
+import { RepoModel, UserModel } from '../../base/models';
 import { PageBodyState } from '../../base/components';
 import axios, { AxiosError, AxiosResponse } from '@ohos/axios';
+import { common } from '@kit.AbilityKit';
 import { Links, Storage } from '../../base/constants';
 
 // PersistentStorage
@@ -24,11 +25,16 @@ struct PageHome {
     }
   }]
 
+  @StorageLink(Storage.authCode) authCode: boolean = false;
+  @StorageLink(Storage.userData) userData: UserModel | null = null;
+  @StorageLink(Storage.repoData) repoData: RepoModel | null = null;
   @StorageLink(Storage.reposData) reposData: [RepoModel] | null = null;
 
   @State tab: number = 0;
   @State page: number = 1;
   @State pageState: PageState = PageState.Loading;
+
+  private context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext
 
   build() {
     Column() {
@@ -67,7 +73,6 @@ struct PageHome {
       TabContent() {
         Navigation(this.navStack) {
           tabRepos({
-            navStack: this.navStack,
             page: this.page,
             data: this.reposData as [RepoModel],
             state: this.pageState,
@@ -76,13 +81,23 @@ struct PageHome {
               this.pageState = state
               this.queryModel()
             },
+            onOpenRepo: (data: RepoModel) => {
+              this.repoData = data
+              this.navStack?.pushPath({ name: Pages.repo });
+            }
           })
         }.title($r('app.string.app_name')).mode(NavigationMode.Stack).navDestination(navDestination).menus(this.menus)
       }.tabBar(customTabBar({ icon: $r('app.media.icon_home'), active: this.tab === 0 }))
 
       TabContent() {
-        tabSettings({})
-      }.tabBar(customTabBar({ icon: $r('app.media.icon_settings'), active: this.tab === 1 }))
+        tabAbout({
+          context: this.context,
+          onLogout: () => {
+            this.authCode = false;
+            this.userData = null;
+          }
+        })
+      }.tabBar(customTabBar({ icon: $r('app.media.icon_page_info'), active: this.tab === 1 }))
     }
     .onSelected((index: number) => {
       this.tab = index;

@@ -1,2 +1,2 @@
-export * from './PageComingSoon';
+export * from './PageNotFound';
 export * from './PageBodyState';

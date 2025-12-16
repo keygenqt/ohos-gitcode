@@ -27,6 +27,22 @@
     {
       "name": "btn_round_icon_fill",
       "value": "#FF000000"
+    },
+    {
+      "name": "form_success_main",
+      "value": "#0f9b0f"
+    },
+    {
+      "name": "form_success_background",
+      "value": "#140F9B0F"
+    },
+    {
+      "name": "form_error_main",
+      "value": "#FF9B0F0F"
+    },
+    {
+      "name": "form_error_background",
+      "value": "#149B0F0F"
     }
   ]
 }

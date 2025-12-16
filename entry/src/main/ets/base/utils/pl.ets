@@ -29,7 +29,7 @@ export function programmingLanguageIconEnum(lang: ProgrammingLanguage): Resource
 /**
  * Get icon programming language by name
  */
-export function programmingLanguageIcon(lang: string | null): Resource {
+export function programmingLanguageIcon(lang: string | null | undefined): Resource {
   if (!lang) {
     return $r('app.media.icon_lan_unknown')
   }

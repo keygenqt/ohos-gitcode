@@ -1,6 +1,7 @@
 import { Storage } from '../constants';
 import { decryptData, encryptData } from '../utils/crypto';
 import { AuthModel } from './AuthModel';
+import { RepoModel } from './RepoModel';
 import { UserModel } from './UserModel';
 
 export * from './AuthModel';
@@ -24,3 +25,4 @@ export function saveUserModel(model: UserModel) {
 export function getUserModel(): UserModel | undefined {
   return AppStorage.get<UserModel>(Storage.userData);
 }
+
