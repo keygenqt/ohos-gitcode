@@ -44,22 +44,27 @@ export struct PageRepoUpdate {
         }
       ))
       .then((response: rcp.Response) => {
-        console.log('>> ' + response.toString())
-        this.isSubmit = false;
-        this.isSuccess = true;
-        this.timeout = setTimeout(() => this.isSuccess = null, 2000);
-        if (this.repoData != null) {
-          // Update state repo
-          this.repoData.description = this.description;
-          this.repoData.homepage = this.homepage;
-          this.repoData.private = !this.isPublic;
-          // Update state list
-          if (this.reposData != null) {
-            const index = this.reposData?.findIndex((e: RepoModel) => e.id == this.repoData?.id) ?? -1;
-            if (index >= 0) {
-              this.reposData[index] = this.repoData;
+        if (response.statusCode == 200) {
+          this.isSubmit = false;
+          this.isSuccess = true;
+          this.timeout = setTimeout(() => this.isSuccess = null, 2000);
+          if (this.repoData != null) {
+            // Update state repo
+            this.repoData.description = this.description;
+            this.repoData.homepage = this.homepage;
+            this.repoData.private = !this.isPublic;
+            // Update state list
+            if (this.reposData != null) {
+              const index = this.reposData?.findIndex((e: RepoModel) => e.id == this.repoData?.id) ?? -1;
+              if (index >= 0) {
+                this.reposData[index] = this.repoData;
+              }
             }
           }
+        } else {
+          this.isSubmit = false;
+          this.isSuccess = false;
+          this.timeout = setTimeout(() => this.isSuccess = null, 2000);
         }
       })
       .catch((_: Error) => {
@@ -67,6 +72,10 @@ export struct PageRepoUpdate {
           this.isSuccess = false;
           this.timeout = setTimeout(() => this.isSuccess = null, 2000);
       });
+  }
+
+  formIsValid(): boolean {
+    return this.homepage.length != 0
   }
 
   @Builder
@@ -108,6 +117,7 @@ export struct PageRepoUpdate {
             .width('100%')
             .enabled(!this.isSubmit)
             .onChange((value: string) => this.homepage = value)
+            .showError(this.homepage.length == 0 ? $r('app.string.form_input_error_required') : null)
         }
         .alignItems(HorizontalAlign.Start)
 
@@ -144,7 +154,7 @@ export struct PageRepoUpdate {
               .fontColor(Color.White)
           }.alignItems(VerticalAlign.Center)
         }
-        .enabled(!this.isSubmit)
+        .enabled(!this.isSubmit && this.formIsValid())
         .width('100%')
         .padding(8)
         .borderRadius($r('app.float.card_radius'))

@@ -32,7 +32,10 @@ export struct PageBodyState {
       }
       .width('100%')
       .height('100%')
-      .onAttach(this.stateAuth)
+      .onAttach(() => {
+        this.state = PageState.Loading
+        this.stateAuth()
+      })
     }
     else if (this.authCode && this.userData === null) {
       Column() {

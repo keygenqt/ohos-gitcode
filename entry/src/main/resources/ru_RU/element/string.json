@@ -1,0 +1,152 @@
+{
+  "string": [
+    {"name":  "Common", "value": "====================================" },
+    {
+      "name": "module_desc",
+      "value": "Основное приложение"
+    },
+    {
+      "name": "reason_permission_internet",
+      "value": "Доступ к интернету"
+    },
+    {
+      "name": "form_input_error_required",
+      "value": "Поле не должно быть пустым"
+    },
+    {"name":  "EntryAbility", "value": "==============================" },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Демонстрационное приложение, использующее открытый API GitCode."
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "GitCode Viewer"
+    },
+    {"name":  "PageNotFound", "value": "==============================" },
+    {
+      "name": "PageNotFound_title",
+      "value": "Ошибка"
+    },
+    {
+      "name": "PageNotFound_text",
+      "value": "Страница не найдена"
+    },
+    {"name":  "PageBodyState", "value": "=============================" },
+    {
+      "name": "PageBodyState_loading_text",
+      "value": "Загрузка данных..."
+    },
+    {
+      "name": "PageBodyState_error_text",
+      "value": "Error receiving data"
+    },
+    {
+      "name": "PageBodyState_login_title",
+      "value": "Добро пожаловать!"
+    },
+    {
+      "name": "PageBodyState_login_text",
+      "value": "Для получения данных необходимо авторизоваться в GitCode."
+    },
+    {
+      "name": "PageBodyState_login_btn",
+      "value": "Перейти на GitCode"
+    },
+    {
+      "name": "PageBodyState_error_btn",
+      "value": "Выйти"
+    },
+    {"name":  "PageUser", "value": "===================================" },
+    {
+      "name": "PageUser_title",
+      "value": "Аккаунт"
+    },
+    {
+      "name": "PageUser_btn_email",
+      "value": "Email"
+    },
+    {
+      "name": "PageUser_btn_blog",
+      "value": "Блог"
+    },
+    {
+      "name": "PageUser_btn_gitcode",
+      "value": "GitCode"
+    },
+    {"name":  "PageRepo", "value": "===================================" },
+    {
+      "name": "PageRepo_title",
+      "value": "Репозиторий"
+    },
+    {
+      "name": "PageRepo_btn_user_page",
+      "value": "Владелец"
+    },
+    {
+      "name": "PageRepo_btn_homepage",
+      "value": "Homepage"
+    },
+    {
+      "name": "PageRepo_btn_gitcode",
+      "value": "GitCode"
+    },
+    {"name":  "PageHome", "value": "====================================" },
+    {
+      "name": "PageHomeTabAbout_version",
+      "value": "v0.0.1"
+    },
+    {
+      "name": "PageHomeTabAbout_description",
+      "value": "Приложение для HarmonyOS NEXT на платформах ArkTS и ArkUI, работающее с REST API GitCode."
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_gallery",
+      "value": "AppGallery"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_dev",
+      "value": "Разработчик"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_repo",
+      "value": "GitCode"
+    },
+    {"name":  "PageRepoUpdate", "value": "=============================" },
+    {
+      "name": "PageRepoUpdate_title",
+      "value": "Настройки"
+    },
+    {
+      "name": "PageRepoUpdate_success",
+      "value": "Настройки репозитория успешно обновлены."
+    },
+    {
+      "name": "PageRepoUpdate_error",
+      "value": "Не удалось обновить настройки репозитория."
+    },
+    {
+      "name": "PageRepoUpdate_homepage_label",
+      "value": "Homepage"
+    },
+    {
+      "name": "PageRepoUpdate_homepage_placeholder",
+      "value": "введите homepage..."
+    },
+    {
+      "name": "PageRepoUpdate_description_label",
+      "value": "Описание"
+    },
+    {
+      "name": "PageRepoUpdate_description_placeholder",
+      "value": "введите описание..."
+    },
+    {
+      "name": "PageRepoUpdate_state_public",
+      "value": "Репозиторий является общедоступным"
+    },
+    {
+      "name": "PageRepoUpdate_btn_submit",
+      "value": "Сохранить"
+    }
+  ]
+}

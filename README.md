@@ -1,9 +1,7 @@
 GitCode Viewer
 ===================
 
-> The application is under development!
-
-![image](./data/preview.png)
+![image](./data/preview2.png)
 
 Application for HarmonyOS NEXT on 
 [ArkTS](https://developer.huawei.com/consumer/en/arkts/)
@@ -14,20 +12,19 @@ working with the GitCode
 
 ### Features
 
-- Navigation Tabs/Navigation
-- Theme Dark/Light
-- HTTP request
-- Page states
-- Lottie
-- OAuth
-- Deeplink
-- Plugin Hvigor
-- BuildProfile
-- PersistentStorage
-- Crypto
-- Paging List
-- Page refresh
-- Coming soon...
+- Theme (dark/light).
+- Localization (en/ru/cn).
+- HTTP request (axios/rcp).
+- Navigation (tabs/navigation).
+- Page states (auth/loading/error).
+- Plugin Hvigor (for BuildProfile).
+- OAuth + Deeplink (open in browser).
+- PersistentStorage & AppStorage.
+- Crypto & Obfuscation.
+- Refresh List/Page.
+- Paging List.
+- Lottie.
+- Form.
 
 ### Resources
 - [Google Fonts](https://fonts.google.com/icons)

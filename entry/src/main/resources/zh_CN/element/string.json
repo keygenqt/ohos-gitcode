@@ -1,0 +1,152 @@
+{
+  "string": [
+    {"name":  "Common", "value": "====================================" },
+    {
+      "name": "module_desc",
+      "value": "主要应用"
+    },
+    {
+      "name": "reason_permission_internet",
+      "value": "访问互联网"
+    },
+    {
+      "name": "form_input_error_required",
+      "value": "该字段不能为空。"
+    },
+    {"name":  "EntryAbility", "value": "==============================" },
+    {
+      "name": "EntryAbility_desc",
+      "value": "使用开放的 GitCode API 的演示应用程序"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "GitCode Viewer"
+    },
+    {"name":  "PageNotFound", "value": "==============================" },
+    {
+      "name": "PageNotFound_title",
+      "value": "错误"
+    },
+    {
+      "name": "PageNotFound_text",
+      "value": "页面未找到"
+    },
+    {"name":  "PageBodyState", "value": "=============================" },
+    {
+      "name": "PageBodyState_loading_text",
+      "value": "正在加载数据..."
+    },
+    {
+      "name": "PageBodyState_error_text",
+      "value": "接收数据时出错"
+    },
+    {
+      "name": "PageBodyState_login_title",
+      "value": "欢迎！"
+    },
+    {
+      "name": "PageBodyState_login_text",
+      "value": "要接收数据，您需要获得 GitCode 的授权。"
+    },
+    {
+      "name": "PageBodyState_login_btn",
+      "value": "前往 GitCode"
+    },
+    {
+      "name": "PageBodyState_error_btn",
+      "value": "注销"
+    },
+    {"name":  "PageUser", "value": "===================================" },
+    {
+      "name": "PageUser_title",
+      "value": "用户信息"
+    },
+    {
+      "name": "PageUser_btn_email",
+      "value": "电子邮件"
+    },
+    {
+      "name": "PageUser_btn_blog",
+      "value": "博客"
+    },
+    {
+      "name": "PageUser_btn_gitcode",
+      "value": "GitCode"
+    },
+    {"name":  "PageRepo", "value": "===================================" },
+    {
+      "name": "PageRepo_title",
+      "value": "仓库信息"
+    },
+    {
+      "name": "PageRepo_btn_user_page",
+      "value": "所有者"
+    },
+    {
+      "name": "PageRepo_btn_homepage",
+      "value": "家"
+    },
+    {
+      "name": "PageRepo_btn_gitcode",
+      "value": "GitCode"
+    },
+    {"name":  "PageHome", "value": "====================================" },
+    {
+      "name": "PageHomeTabAbout_version",
+      "value": "v0.0.1"
+    },
+    {
+      "name": "PageHomeTabAbout_description",
+      "value": "适用于基于 ArkTS 和 ArkUI 的 HarmonyOS NEXT 应用程序，可与 GitCode REST API 配合使用。"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_gallery",
+      "value": "AppGallery"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_dev",
+      "value": "开发者"
+    },
+    {
+      "name": "PageHomeTabAbout_btn_app_repo",
+      "value": "GitCode"
+    },
+    {"name":  "PageRepoUpdate", "value": "=============================" },
+    {
+      "name": "PageRepoUpdate_title",
+      "value": "仓库更新"
+    },
+    {
+      "name": "PageRepoUpdate_success",
+      "value": "存储库设置已成功更新。"
+    },
+    {
+      "name": "PageRepoUpdate_error",
+      "value": "存储库设置无法更新。"
+    },
+    {
+      "name": "PageRepoUpdate_homepage_label",
+      "value": "首页"
+    },
+    {
+      "name": "PageRepoUpdate_homepage_placeholder",
+      "value": "输入首页..."
+    },
+    {
+      "name": "PageRepoUpdate_description_label",
+      "value": "描述"
+    },
+    {
+      "name": "PageRepoUpdate_description_placeholder",
+      "value": "输入描述..."
+    },
+    {
+      "name": "PageRepoUpdate_state_public",
+      "value": "存储库是公开的"
+    },
+    {
+      "name": "PageRepoUpdate_btn_submit",
+      "value": "节省"
+    }
+  ]
+}

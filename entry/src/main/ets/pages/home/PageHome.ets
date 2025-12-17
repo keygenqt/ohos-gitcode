@@ -38,9 +38,10 @@ struct PageHome {
 
   build() {
     Column() {
-      PageBodyState({state: this.pageState, stateLoading: () => {
-        this.queryModel()
-      }}) {
+      PageBodyState({
+        state: this.pageState,
+        stateLoading: () => { this.queryModel() },
+      }) {
         this.bodyModel()
       }
     }

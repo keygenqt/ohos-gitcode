@@ -9,6 +9,10 @@
       "name": "reason_permission_internet",
       "value": "Access internet"
     },
+    {
+      "name": "form_input_error_required",
+      "value": "Field must not be empty"
+    },
     {"name":  "EntryAbility", "value": "==============================" },
     {
       "name": "EntryAbility_desc",
