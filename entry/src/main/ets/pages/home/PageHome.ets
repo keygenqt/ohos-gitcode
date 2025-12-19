@@ -41,6 +41,7 @@ struct PageHome {
       PageBodyState({
         state: this.pageState,
         stateLoading: () => { this.queryModel() },
+        stateAuthLoading: () => { this.pageState = PageState.Loading }
       }) {
         this.bodyModel()
       }
@@ -50,9 +51,6 @@ struct PageHome {
   }
 
   queryModel() {
-    if (this.page == 1) {
-      this.pageState = PageState.Loading
-    }
     axios.get<[RepoModel], AxiosResponse<[RepoModel]>, null>(Links.user_repos(this.page))
       .then((response: AxiosResponse<[RepoModel]>) => {
         if (this.page != 1 && this.reposData instanceof Array) {
