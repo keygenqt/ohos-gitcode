@@ -55,10 +55,12 @@ export struct PageRepoUpdate {
             this.repoData.private = !this.isPublic;
             // Update state list
             if (this.reposData != null) {
+              this.reposData.reverse(); // @todo data not reload without
               const index = this.reposData?.findIndex((e: RepoModel) => e.id == this.repoData?.id) ?? -1;
               if (index >= 0) {
                 this.reposData[index] = this.repoData;
               }
+              this.reposData.reverse();
             }
           }
         } else {

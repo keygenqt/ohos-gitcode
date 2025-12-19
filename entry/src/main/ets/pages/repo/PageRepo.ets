@@ -235,6 +235,7 @@ export struct PageRepo {
         this.queryModel()
       }
     })
+    .height('100%')
     .refreshOffset(64)
     .pullToRefresh(true)
   }

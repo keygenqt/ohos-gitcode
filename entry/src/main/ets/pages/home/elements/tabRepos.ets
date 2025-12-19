@@ -110,6 +110,7 @@ export function tabRepos(params: TabReposParams) {
       params.onLoading(1, PageState.Refresh)
     }
   })
+  .height('100%')
   .refreshOffset(64)
   .pullToRefresh(true)
 }

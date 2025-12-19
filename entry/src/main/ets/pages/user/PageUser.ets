@@ -174,6 +174,7 @@ export struct PageUser {
         .alignItems(HorizontalAlign.Center)
       }
     }
+    .height('100%')
     .onStateChange((refreshStatus: RefreshStatus) => {
       if (refreshStatus == RefreshStatus.Refresh) {
         this.pageState = PageState.Refresh
