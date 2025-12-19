@@ -100,6 +100,7 @@ export struct PageBodyState {
       Text($r('app.string.PageBodyState_login_text'))
         .width('100%')
         .fontSize(18)
+        .padding({left: 30, right: 30})
         .textAlign(TextAlign.Center)
 
       Blank().height(3)
