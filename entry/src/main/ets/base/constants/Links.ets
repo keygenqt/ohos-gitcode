@@ -20,7 +20,7 @@ export class Links {
     return link
   }
 
-  static auth_token(code: string) {
+  static auth_token(code: string | null) {
     const link = `https://gitcode.com/oauth/token?grant_type=authorization_code&code=${code}&client_id=${BuildProfile.clientId}&client_secret=${BuildProfile.clientSecret}`;
     console.debug(link)
     return link

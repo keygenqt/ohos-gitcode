@@ -7,12 +7,12 @@ import { PageUser } from '../../user/PageUser';
 @Builder
 export function navDestination(name: string, param: string) {
   if (name === Pages.repo) {
-    PageRepo(param ? JSON.parse(param) : JSON.parse("{}"));
+    PageRepo();
   } else if (name === Pages.repo_update) {
-    PageRepoUpdate(param ? JSON.parse(param) : JSON.parse("{}"));
+    PageRepoUpdate();
   } else if (name === Pages.user) {
     PageUser(param ? JSON.parse(param) : JSON.parse("{}"));
   } else {
-    PageNotFound()
+    PageNotFound();
   }
 }

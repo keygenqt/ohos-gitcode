@@ -88,7 +88,11 @@ struct PageHome {
               this.navStack?.pushPath({ name: Pages.repo });
             }
           })
-        }.title($r('app.string.app_name')).mode(NavigationMode.Stack).navDestination(navDestination).menus(this.menus)
+        }
+        .title($r('app.string.app_name'))
+        .mode(NavigationMode.Stack)
+        .navDestination(navDestination)
+        .menus(this.menus)
       }.tabBar(customTabBar({ icon: $r('app.media.icon_home'), active: this.tab === 0 }))
 
       TabContent() {

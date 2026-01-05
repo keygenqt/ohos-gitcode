@@ -1,7 +1,6 @@
 import { Storage } from '../constants';
 import { decryptData, encryptData } from '../utils/crypto';
 import { AuthModel } from './AuthModel';
-import { RepoModel } from './RepoModel';
 import { UserModel } from './UserModel';
 
 export * from './AuthModel';
